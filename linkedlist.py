@@ -38,12 +38,58 @@ class LinkedList:
 		new_node.next = prev_node.next
 		prev_node.next = new_node
 
+	def delete_node(self, key):
+		cur_node = self.head
+		
+		if cur_node and cur_node.data == key:
+			self.head = cur_node.next
+			cur_node = None
+			return
+
+		prev_node = None
+		while cur_node.data != key:
+			prev_node = cur_node
+			cur_node = cur_node.next
+
+		if cur_node is None:
+			return
+
+		prev_node.next = cur_node.next
+		cur_node = None
+
+	def delete_node_at_pos(self, pos):
+		cur_node = self.head
+
+		if cur_node and pos == 1:
+			self.head = cur_node.next
+			cur_node = None
+			return
+
+		count = 1
+		prev_node = None
+		while cur_node and pos != count:
+			prev_node = cur_node
+			cur_node = cur_node.next
+			count+=1
+
+		if cur_node is None:
+			return
+
+		prev_node.next = cur_node.next
+		cur_node = None
+
+
+
 llist = LinkedList()
 llist.append('A')
 llist.append('B')
 llist.append('C')
 llist.append('D')
-llist.prepend('E')
-llist.prepend('F')
-llist.insert_after_node(llist.head.next, "x")
+#llist.delete_node('A')
+llist.delete_node_at_pos(1)
+#llist.prepend('E')
+#llist.prepend('F')
+
+
+#llist.insert_after_node(llist.head.next, "x")
 llist.print_list()
